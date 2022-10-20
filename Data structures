@@ -1,0 +1,18 @@
+name = input('Enter File:')
+if len(name) < 1: name = 'mbox-short.txt'
+handle = open(name)
+
+record = dict()
+for line in handle:
+    if 'From:' in line:
+        continue
+    if 'From' in line:
+        words = line.split()
+        inbox = words[5].split(':')[0]
+        record[inbox] = record.get(inbox,0) + 1
+        #print(record)
+
+order = sorted(record.items())
+#print(order)
+for k,v in order:
+    print(k,v)
